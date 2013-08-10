@@ -1,4 +1,6 @@
 backtobasics-messaging
 ======================
 
-Workshop for messaging
+Workshop for messaging.
+
+TODO: Instruksjoner
