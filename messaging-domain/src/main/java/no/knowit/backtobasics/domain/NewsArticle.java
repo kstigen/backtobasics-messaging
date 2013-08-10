@@ -1,5 +1,6 @@
 package no.knowit.backtobasics.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NewsArticle {
@@ -59,6 +60,10 @@ public class NewsArticle {
 
     @Override
     public String toString() {
-        return getId() + ": " + getHeadline();
+        return getId() + ": " + getHeadline() + " (Updated " + formatDate(getUpdated()) + ")";
+    }
+
+    private String formatDate(Date date) {
+        return new SimpleDateFormat("dd.MM.yyyy HH:mm").format(date);
     }
 }

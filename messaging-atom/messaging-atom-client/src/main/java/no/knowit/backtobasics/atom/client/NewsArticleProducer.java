@@ -15,13 +15,14 @@ public class NewsArticleProducer {
     public static final String FEED_URL = "http://localhost:8080/newsArticle";
 
     public static void main(String args[]) {
-        NewsArticle newsArticle = new NewsArticle(1, "En nyhetsartikkel" + new Date().toString(), "Med et veldig spennende innhold", new Date(), new Date());
-
-        NewsArticleProducer producer = new NewsArticleProducer();
-        producer.produce(newsArticle);
+        post(new NewsArticle(1,
+                "En nyhetsartikkel",
+                "Med et veldig spennende innhold",
+                new Date(),
+                new Date()));
     }
 
-    private void produce(NewsArticle newsArticle) {
+    private static void post(NewsArticle newsArticle) {
         Abdera abdera = new Abdera();
         AbderaClient client = new AbderaClient(abdera);
 
@@ -32,15 +33,13 @@ public class NewsArticleProducer {
         entry.setUpdated(newsArticle.getUpdated());
         entry.setContent(newsArticle.getBody());
         entry.setId("tag:example.org,2011:foo");
-        System.out.println(entry.toString());
 
 
         ClientResponse response = client.post(FEED_URL, entry);
-        if(response.getType() == Response.ResponseType.SUCCESS){
+        if (response.getType() == Response.ResponseType.SUCCESS) {
             System.out.println("Successful posting to server");
         } else {
-            System.out.println(response.getStatusText());
-            System.out.println("Could not post to server....");
+            System.out.println("Could not post to server: " + response.getStatus() + ":" + response.getStatusText());
         }
     }
 }
