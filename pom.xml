@@ -9,6 +9,7 @@
   <modules>
     <module>messaging-domain</module>
     <module>messaging-atom</module>
+    <module>messaging-akka</module>
   </modules>
 
   <properties>
